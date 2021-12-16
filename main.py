@@ -1,0 +1,17 @@
+import pandas as pd
+import operator
+df = pd.read_csv('iouring.csv')
+df.drop(['Unnamed: 0', 'Age', 'Date', 'Id'], axis = 1, inplace = True)
+d1=dict()
+header=list(df.columns.values)
+fields=[]
+for field in header:
+  for i in range(5000):
+    for c in df[field][i]:
+      if c in d1:
+        d1[c]= d1[c]+1
+      else:
+        d1[c]=1
+print (d1)
+sdd1 = dict( sorted(d1.items(), key=operator.itemgetter(1),reverse=True))
+print(sdd1)
